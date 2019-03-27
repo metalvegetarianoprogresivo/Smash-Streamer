@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="gr__smashstreamer_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-112341214-1');
+  </script>
+<!-- Jquery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+    $(function () {
+				var socket = io();
+				console.log('ready')
+				socket.on('match_update', function (data) {
+					console.log('Test...')
+					$('#playerOneTag').text(data.name)
+					$('#playerOneScore').html(data.score)
+				});
+			});
+	</script>
+  
+<title>Stream</title>
+<link rel="shortcut icon" href="http://smashstreamer.com/content/Images/TournamentLogo.png" />
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body style="" data-gr-c-s-loaded="true" data-feedly-mini="yes">
+<span id="playerOneCharacter" class="hide">./content/Images/Smash4Characters/Kirby.png</span>
+<span id="playerTwoCharacter" class="hide">./content/Images/Smash4Characters/LittleMac.png</span>
+<span id="playerOneCountry" class="hide">./content/Images/Flags/ca.png</span>
+<span id="playerTwoCountry" class="hide">./content/Images/Flags/mx.png</span>
+<span id="background" class="hide">./content/Images/background/NewYork.jpeg</span>
+<div id="leftSide">
+<div id="leftFlag">
+</div>
+<div id="leftCharacter">
+</div>
+</div>
+<div id="rightSide">
+<div id="rightFlag">
+</div>
+<div id="rightCharacter">
+</div>
+</div>
+<div id="gameWindow">
+</div>
+<div id="bottom">
+<div id="playerOneInfo" class="playerInfo">
+  <h1><span class="sponsor" id="playerOnePrefix">NTN</span> <span id="playerOneTag">Xotl</span></h1>
+  <h2 id="playerOneTwitter" style="opacity: 1;"> </h2>
+  <span class="score" id="playerOneScore">2</span>
+</div>
+<div id="playerTwoInfo" class="playerInfo">
+  <h1><span class="sponsor" id="playerTwoPrefix">SEES</span> <span id="playerTwoTag">DIO</span></h1>
+  <h2 id="playerTwoTwitter" style="opacity: 1;"> </h2>
+  <span class="score" id="playerTwoScore">1</span>
+</div>
+<div id="dash">-</div>
+<div id="tournyLogo">
+</div>
+<div id="tournyNameDiv">
+<p id="tournyName">Haxor Magic</p>
+</div>
+<div id="tournyRoundDiv">
+  <p id="tournyRound">Pools</p>
+</div>
+<div id="leftCam">
+</div>
+<div id="rightCam">
+</div>
+</div>
+<script>
+var AnimationLenght = 250;
+var refreshRate = 1000;
+//setTimeout('window.location.href=window.location.href;', 3000);
+// $.getJSON("getData.php", function(data){
+//     $.each(data, function (index, value) {
+//     // UpdateStream(index,value);
+//     });
+// });
+// setInterval(function() {
+//   $.getJSON("getData.php", function(data){
+// var count = 0;
+//     $.each(data, function (index, value) {
+//     UpdateStream(index,value);
+//     //console.log(count);
+//     count++;
+
+//     });
+// });
+// }, refreshRate);
+function FirstUpdate(index,value) {
+
+    if(index == 'leftCharacter' || index == 'rightCharacter' || index == 'leftFlag' || index == 'rightFlag')
+    {
+      // $('#leftCharacter').css('background-image', 'url('+$('#playerOneCharacter').text()+')');
+    // $('#rightCharacter').css('background-image', 'url('+$('#playerTwoCharacter').text()+')');
+    // $('#leftFlag').css('background-image', 'url('+$('#playerOneCountry').text()+')');
+    // $('#rightFlag').css('background-image', 'url('+$('#playerTwoCountry').text()+')');
+    }
+    else if($('#'+index).text() != value){
+    $('#'+index).animate({'opacity': 0}, 1000, function () {
+      $('#'+index).text(value);
+    }).animate({'opacity': 1}, AnimationLenght);
+    }
+   // else if(){
+
+   // }
+ };
+function UpdateStream(index,value) {
+if(value == "")
+{
+ value = " ";
+}
+if(index == 'leftCharacter' || index == 'rightCharacter' || index == 'leftFlag' || index == 'rightFlag' || index == "background")
+    {
+    if(index == 'leftCharacter' && $('#playerOneCharacter').text() != value){
+      $('#playerOneCharacter').text(value);
+      $('#leftCharacter').animate({'opacity': 0}, AnimationLenght, function () {
+        $('#leftCharacter').css('background-image', 'url('+value+')');
+      }).animate({'opacity': 1}, AnimationLenght);
+    }
+    else if(index == 'rightCharacter' && $('#playerTwoCharacter').text() != value){
+      $('#playerTwoCharacter').text(value);
+      $('#rightCharacter').animate({'opacity': 0}, AnimationLenght, function () {
+        $('#rightCharacter').css('background-image', 'url('+value+')');
+
+      }).animate({'opacity': 1}, AnimationLenght);
+    }
+    else if(index == 'leftFlag' && $('#playerOneCountry').text() != value){
+      $('#playerOneCountry').text(value);
+      $('#leftFlag').animate({'opacity': 0}, AnimationLenght, function () {
+        $('#leftFlag').css('background-image', 'url('+value+')');
+
+      }).animate({'opacity': 1}, AnimationLenght);
+    }
+    else if(index == 'rightFlag' && $('#playerTwoCountry').text() != value){
+      $('#playerTwoCountry').text(value);
+      $('#rightFlag').animate({'opacity': 0}, AnimationLenght, function () {
+        $('#rightFlag').css('background-image', 'url('+value+')');
+
+      }).animate({'opacity': 1}, AnimationLenght);
+    }
+    else if(index == 'background' && $('#background').text() != value){
+      $('#background').text(value);
+      $('body').css('background-image', 'url('+value+')');
+    }
+    }
+    else if($('#'+index).text() != value){
+    $('#'+index).animate({'opacity': 0}, AnimationLenght, function () {
+      $(this).text(value);
+    }).animate({'opacity': 1}, AnimationLenght);
+    }
+   // else if(){
+
+   // }
+ };
+</script>
+
+
+<div id="feedly-mini" title="feedly Mini tookit"></div></body></html>

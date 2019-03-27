@@ -1,0 +1,221 @@
+html {
+max-width: 1920px;
+max-height: 1080px;
+overflow: hidden;
+background-color: white;
+}
+body{
+width: 1920px; height: 1080px; background-color: black; margin: 0px;
+overflow: hidden;
+background: url('./content/Images/background/NewYork.jpeg');
+background-color: pink;
+background-size: cover;
+}
+#leftSide, #rightSide {
+height: 1080px;
+width: 240px;
+position: absolute;
+}
+#leftSide{
+
+}
+#rightSide{
+left: 1680px;
+}
+#bottom {
+position: absolute;
+width: 1440px;
+height: 270px;
+top: 810px;
+left: 240px;
+
+}
+#gameWindow {
+position: absolute;
+width: 1440px;
+height: 810px;
+left: 240px;
+background-color: magenta;
+border: 6px solid black;
+border-radius: 5px;
+z-index: 1;
+}
+#leftFlag, #rightFlag {
+position: absolute;
+width: 360px;
+height: 240px;
+top: -25px;
+    background-size: cover;
+}
+#leftFlag {
+background: url('./content/Images/Flags/ca.png') 0 0 no-repeat;
+background-size: 100%;
+left: -50px;
+-webkit-transform: rotate(15deg);
+-moz-transform: rotate(15deg);
+-o-transform: rotate(15deg);
+}
+#rightFlag {
+background: url('./content/Images/Flags/mx.png') 0 0 no-repeat;
+background-size: 100%;
+right: -50px;
+-webkit-transform: rotate(-15deg);
+-moz-transform: rotate(-15deg);
+-o-transform: rotate(-15deg);
+}
+
+#leftCharacter, #rightCharacter {
+position: absolute;
+width: 600px;
+height: 600px;
+top: 300px;
+}
+#leftCharacter {
+background: url('./content/Images/Smash4Characters/Kirby.png') 0 0 no-repeat;
+background-size: 100%;
+-moz-transform: scaleX(-1);
+-o-transform: scaleX(-1);
+-webkit-transform: scaleX(-1);
+transform: scaleX(-1);
+filter: FlipH;
+-ms-filter: "FlipH";
+left: -250px;
+}
+
+#rightCharacter {
+background: url('./content/Images/Smash4Characters/LittleMac.png') 0 0 no-repeat;
+background-size: 100%;
+left: -100px;
+
+}
+#leftCam, #rightCam {
+position: absolute;
+width: 480px;
+height: 248px;
+background-color: magenta;
+top: 10px;
+
+z-index: 9999;
+border: 6px solid black;
+}
+#leftCam {
+Left: -240px;
+}
+#rightCam{
+right: -240px;
+}
+#tournyLogo {
+position: absolute;
+background: url('./content/Images/TournamentLogo.png') 0 0 no-repeat;
+background-size: 100%;
+width: 150px;
+height: 150px;
+left: 645px;
+top: 15px;
+z-index: 9999;
+display: none;
+}
+
+.playerInfo{
+position: absolute;
+top: 0;
+width: 300px;
+height: 248px;
+z-index: 9999;
+color: white;
+font-family: Impact;
+}
+.playerInfo h1{
+font-size: 50px;text-align: center;
+}
+.playerInfo h2 {
+font-size: 25px;text-align: center;
+margin-top: -25px;
+color: rgb(242, 242, 242);
+font-family: 'Helvetica Neue';
+}
+.sponsor {
+color: grey;
+}
+
+#playerOneInfo {
+left: 240px;
+padding-left: 10px;
+}
+#playerTwoInfo {
+right: 240px;
+padding-right: 10px;
+}
+.score {
+position: absolute;
+height: 50px;
+top: -10px;
+
+z-index: 9999;
+font-size: 150px;
+
+}
+#playerTwoScore {
+left: -75px;
+}
+#playerOneScore {
+right: -75px;
+}
+
+
+
+
+
+#tournyRoundDiv {
+position: absolute;
+width: 25%;
+margin-left: 37.5%;
+height: 50px;
+bottom: -5px;
+z-index: 9999;
+
+}
+#tournyRoundDiv p {
+margin-top: 10px;
+padding: 0px;
+text-align: center;
+vertical-align: middle;
+font-size: 25px;
+color: white;
+font-family: Impact, Sans-serif;
+}
+
+#tournyNameDiv {
+position: absolute;
+width: 50%;
+margin-left: 25%;
+height: 50px;
+bottom: 75px;
+z-index: 9999;
+}
+#tournyNameDiv p {
+margin-top: 5px;
+padding: 0px;
+text-align: center;
+vertical-align: middle;
+font-size: 80px;
+color: white;
+}
+.hide {
+display: none;
+}
+#dash {
+position: absolute;
+left: 695px;
+z-index: 9999;
+font-size: 150px;
+font-family: Impact;
+color: white;
+}
+#playerOneScore, #playerTwoScore, #playerOneTag, #playerOneTwitter,#playerTwoTag, #playerTwoTwitter,#tournyName,#tournyRound {
+ text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
