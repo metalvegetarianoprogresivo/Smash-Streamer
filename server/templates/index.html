@@ -15,9 +15,27 @@
 				var socket = io();
 				console.log('ready')
 				socket.on('match_update', function (data) {
-					console.log('Test...')
-					$('#playerOneTag').text(data.name)
-					$('#playerOneScore').html(data.score)
+					console.log('Test...', data)
+					$('#playerOnePrefix').text(data.playerOne.team)
+					$('#playerOneTag').text(data.playerOne.name)
+					$('#playerOneScore').html(data.playerOne.score)
+					$('#leftCharacterNameWeeb').html(data.playerOne.character.displayNameJa)
+					$('#leftCharacterName').html(data.playerOne.character.displayName.en_US)
+					$('#leftCharacter').animate({ 'opacity': 0 }, AnimationLenght, function () {
+						$('#leftSide').css('background', data.playerOne.character.color)
+						$('#leftCharacter').css('background-image', 'url(/renders/' + data.playerOne.character.file + '.png)')
+					}).animate({ 'opacity': 1 }, AnimationLenght);
+					$('#playerTwoPrefix').text(data.playerTwo.team)
+					$('#playerTwoTag').text(data.playerTwo.name)
+					$('#playerTwoScore').html(data.playerTwo.score)
+					$('#rightCharacterNameWeeb').html(data.playerTwo.character.displayNameJa)
+					$('#rightCharacterName').html(data.playerTwo.character.displayName.en_US)
+					$('#rightCharacter').animate({ 'opacity': 0 }, AnimationLenght, function () {
+						$('#rightSide').css('background', data.playerTwo.character.color)
+						$('#rightCharacter').css('background-image', 'url(/renders/' + data.playerTwo.character.file + '.png)')
+					}).animate({ 'opacity': 1 }, AnimationLenght);
+					$('#tournyName').text(data.tournyName)
+					$('#tournyRound').text(data.tournyRound)
 				});
 			});
 	</script>
@@ -27,7 +45,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="" data-gr-c-s-loaded="true" data-feedly-mini="yes">
-<span id="playerOneCharacter" class="hide">./content/Images/Smash4Characters/Kirby.png</span>
+<span id="playerOneCharacter" class="hide">/renders/kirby.png</span>
 <span id="playerTwoCharacter" class="hide">./content/Images/Smash4Characters/LittleMac.png</span>
 <span id="playerOneCountry" class="hide">./content/Images/Flags/ca.png</span>
 <span id="playerTwoCountry" class="hide">./content/Images/Flags/mx.png</span>
@@ -35,12 +53,16 @@
 <div id="leftSide">
 <div id="leftFlag">
 </div>
+<div id="leftCharacterName" class="playerCharacterInfo">CHARACTER</div>
+<div id="leftCharacterNameWeeb" class="playerCharacterInfoWeeb">CHARACTER</div>
 <div id="leftCharacter">
 </div>
 </div>
 <div id="rightSide">
 <div id="rightFlag">
 </div>
+<div id="rightCharacterName" class="playerCharacterInfo">CHARACTER</div>
+<div id="rightCharacterNameWeeb" class="playerCharacterInfoWeeb">CHARACTER</div>
 <div id="rightCharacter">
 </div>
 </div>

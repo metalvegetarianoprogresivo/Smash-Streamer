@@ -8,7 +8,7 @@ body{
 width: 1920px; height: 1080px; background-color: black; margin: 0px;
 overflow: hidden;
 background: url('./content/Images/background/NewYork.jpeg');
-background-color: pink;
+background-color: #1c94c3;
 background-size: cover;
 }
 #leftSide, #rightSide {
@@ -28,7 +28,7 @@ width: 1440px;
 height: 270px;
 top: 810px;
 left: 240px;
-
+background: #1c94c3;
 }
 #gameWindow {
 position: absolute;
@@ -67,25 +67,20 @@ right: -50px;
 #leftCharacter, #rightCharacter {
 position: absolute;
 width: 600px;
-height: 600px;
-top: 300px;
+height: 800px;
+top: 200px;
+margin-left: 50px;
 }
 #leftCharacter {
 background: url('./content/Images/Smash4Characters/Kirby.png') 0 0 no-repeat;
 background-size: 100%;
--moz-transform: scaleX(-1);
--o-transform: scaleX(-1);
--webkit-transform: scaleX(-1);
-transform: scaleX(-1);
-filter: FlipH;
--ms-filter: "FlipH";
 left: -250px;
 }
 
 #rightCharacter {
 background: url('./content/Images/Smash4Characters/LittleMac.png') 0 0 no-repeat;
 background-size: 100%;
-left: -100px;
+left: -250px;
 
 }
 #leftCam, #rightCam {
@@ -116,6 +111,30 @@ z-index: 9999;
 display: none;
 }
 
+.playerCharacterInfo{
+position: absolute;
+top: 40px;
+left: 20px;
+width: 300px;
+height: 248px;
+z-index: 9999;
+color: white;
+font-family: Impact;
+font-size: xx-large;
+}
+
+.playerCharacterInfoWeeb{
+position: absolute;
+top: 10px;
+left: 20px;
+width: 300px;
+height: 248px;
+z-index: 9999;
+color: white;
+font-family: Impact;
+font-size: large;
+}
+
 .playerInfo{
 position: absolute;
 top: 0;
@@ -135,7 +154,7 @@ color: rgb(242, 242, 242);
 font-family: 'Helvetica Neue';
 }
 .sponsor {
-color: grey;
+color: #add8e6;
 }
 
 #playerOneInfo {
