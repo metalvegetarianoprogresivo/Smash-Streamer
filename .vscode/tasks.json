@@ -1,0 +1,52 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Docker image",
+            "type": "shell",
+            "command": "docker build -t smash-streamer .",
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                // "panel": "new"
+            }
+        },
+        {
+            "label": "Run react app",
+            "type": "process",
+            "command": "docker",
+            "args": [
+                "run", "--rm", "-d",
+                "--name", "smash-streamer-ui",
+                "-v", "${workspaceFolder}/src:/usr/app/src",
+                "-p", "3000:3000",
+                "smash-streamer",
+                "npm", "start"
+            ],
+            "dependsOn": [
+                "Stop react app",
+                "Build Docker image"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                // "panel": "new"
+            }
+        },
+        {
+            "label": "Stop react app",
+            "type": "shell",
+            "command": "docker kill smash-streamer-ui || docker kill smash-streamer || true",
+            "group": "build",
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared"
+            }
+        }
+    ]
+}
