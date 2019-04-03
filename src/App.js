@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import openSocket from 'socket.io-client'
 
-import { CharacterSelect, GeneralInput, PlayerInput } from './components'
-import { characterData } from './utils/playerUpdates'
+import { CharacterSelect, GeneralInput, PlayerInput, MatchSelect } from './components'
+import { characterData, getOpenMatches } from './utils/playerUpdates'
 import './App.css'
 import 'materialize-css/dist/css/materialize.min.css'
 
@@ -19,13 +19,15 @@ class App extends Component {
       playerTwoScore: 0,
       playerTwoCharacter: '',
       inputName: '',
-      inputRound: ''
+      inputRound: '',
+      inputId: '',
+      matches: []
     }
 
-    socket.on('match_update', msg => console.log(msg))
-
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleMatchSubmit = this.handleMatchSubmit.bind(this)
+    this.handleEventSubmit = this.handleEventSubmit.bind(this)
+    //this.handleTourneySubmit = this.handleTourneySubmit.bind(this)
   }
 
   handleChange(event) {
@@ -33,16 +35,13 @@ class App extends Component {
     const value = target.value
     const name = target.name
 
-    console.log(value, name)
-
     this.setState({
       [name]: value
     })
   }
 
-  handleSubmit(event) {
+  handleMatchSubmit(event) {
     event.preventDefault()
-    console.log(this.state)
     socket.emit('match_update', {
       playerOne: {
         team: this.state.playerOneTeam,
@@ -55,22 +54,55 @@ class App extends Component {
         name: this.state.playerTwoName,
         score: this.state.playerTwoScore,
         character: characterData(this.state.playerTwoCharacter)[0]
-      },
+      }
+    })
+  }
+
+  handleEventSubmit(event) {
+    event.preventDefault()
+    socket.emit('event_update', {
       tournyName: this.state.inputName,
       tournyRound: this.state.inputRound
     })
   }
 
+  handleTourneySubmit =  event => {
+    event.preventDefault()
+    const id = this.state.inputId
+    getOpenMatches(id)
+      .then(res => {
+        console.log('complete')
+        this.setState({ matches: res })
+      })
+      .catch(err => console.error(err))
+  }
+
   render() {
     return (
       <div className='App container'>
-        <form onSubmit={this.handleSubmit}>
           <div class='section'>
             <h5>Player Match</h5>
             <p>1v1</p>
           </div>
           <div class='divider'></div>
           <div class='row'>
+            <form onSubmit={this.handleTourneySubmit}>
+              <div class='col s12'>
+                <div class='section'>
+                  <h5>Get Tournament Data</h5>
+                </div>
+              </div>
+              <div class='col s6'>
+                <GeneralInput title='Tournament Information' type='text' inputValue={this.state.tourneyId} handleChange={this.handleChange} />
+              </div>
+              <div class='col s6'>
+                <input className='waves-effect waves-light btn-large' type='submit' id='submitTournament' value='Get Matches' />
+              </div>
+            </form>
+          </div>
+          <div class='divider'></div>
+          <div class='row'>
+            <form onSubmit={this.handleMatchSubmit}>
             <div class='col s6'>
               <div class='section'>
                 <h5>Player One</h5>
@@ -90,12 +122,18 @@ class App extends Component {
               <CharacterSelect playerNumber='two' handleChange={this.handleChange} playerValue={this.state.playerTwoCharacter} />
             </div>
             <div class='col s12'>
-              <GeneralInput title='Tournament Name' inputValue={this.state.tourneyName} type='name' handleChange={this.handleChange} />
-              <GeneralInput title='Tournament Round' inputValue={this.state.tourneyRound} type='round' handleChange={this.handleChange} />
-              <input className='waves-effect waves-light btn-large' type='submit' id='submitScore' value='GO!' />
-            </div> 
+              <input className='waves-effect waves-light btn-large' type='submit' id='submitScore' value='Update Match' />
+            </div>
+            </form>
           </div> 
-        </form>
+        <div className='col s12'>
+          <form onSubmit={this.handleEventSubmit}>
+            <GeneralInput title='Tournament Name' inputValue={this.state.tourneyName} type='name' handleChange={this.handleChange} />
+            <GeneralInput title='Tournament Round' inputValue={this.state.tourneyRound} type='round' handleChange={this.handleChange} />
+            <MatchSelect selectName='MatchSelectId' matches={this.state.matches} handleChange={this.handleChange} />
+            <input className='waves-effect waves-light btn-large' type='submit' id='submitEvent' value='Update Event' />
+          </form>
+        </div>
       </div>
     )
   }

@@ -13,9 +13,8 @@
 	<script>
     $(function () {
 				var socket = io();
-				console.log('ready')
 				socket.on('match_update', function (data) {
-					console.log('Test...', data)
+					console.log('Test... match', data)
 					$('#playerOnePrefix').text(data.playerOne.team)
 					$('#playerOneTag').text(data.playerOne.name)
 					$('#playerOneScore').html(data.playerOne.score)
@@ -33,7 +32,11 @@
 					$('#rightCharacter').animate({ 'opacity': 0 }, AnimationLenght, function () {
 						$('#rightSide').css('background', data.playerTwo.character.color)
 						$('#rightCharacter').css('background-image', 'url(/renders/' + data.playerTwo.character.file + '.png)')
-					}).animate({ 'opacity': 1 }, AnimationLenght);
+          }).animate({ 'opacity': 1 }, AnimationLenght);
+        });
+
+				socket.on('event_update', function (data) {
+					console.log('Test... event', data)
 					$('#tournyName').text(data.tournyName)
 					$('#tournyRound').text(data.tournyRound)
 				});
