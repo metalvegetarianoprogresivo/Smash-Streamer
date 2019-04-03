@@ -23,14 +23,9 @@ class App extends Component {
       inputId: '',
       matches: []
     }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handleMatchSubmit = this.handleMatchSubmit.bind(this)
-    this.handleEventSubmit = this.handleEventSubmit.bind(this)
-    //this.handleTourneySubmit = this.handleTourneySubmit.bind(this)
   }
 
-  handleChange(event) {
+  handleChange = event => {
     const target = event.target
     const value = target.value
     const name = target.name
@@ -40,7 +35,7 @@ class App extends Component {
     })
   }
 
-  handleMatchSubmit(event) {
+  handleMatchSubmit = event => {
     event.preventDefault()
     socket.emit('match_update', {
       playerOne: {
@@ -58,7 +53,7 @@ class App extends Component {
     })
   }
 
-  handleEventSubmit(event) {
+  handleEventSubmit = event => {
     event.preventDefault()
     socket.emit('event_update', {
       tournyName: this.state.inputName,
@@ -66,10 +61,10 @@ class App extends Component {
     })
   }
 
-  handleTourneySubmit =  event => {
+  handleTourneySubmit = event => {
     event.preventDefault()
-    const id = this.state.inputId
-    getOpenMatches(id)
+
+    getOpenMatches(this.state.inputId)
       .then(res => {
         console.log('complete')
         this.setState({ matches: res })

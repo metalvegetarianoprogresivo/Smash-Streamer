@@ -16,7 +16,7 @@ export const getOpenMatches = id => new Promise((resolve, reject) => {
 
     xhr.addEventListener('readystatechange', function () {
         if (this.readyState === 4) {
-            console.log(JSON.parse(this.responseText))
+            console.log('Data', JSON.parse(this.responseText))
             return resolve(JSON.parse(this.responseText))
         }
         return reject(this.statusText)
