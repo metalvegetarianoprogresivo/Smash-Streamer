@@ -21,6 +21,7 @@ export const getOpenMatches = id => new Promise((resolve, reject) => {
     })
     console.log('asdasd', id)
     xhr.open('GET', `https://cors-anywhere.herokuapp.com/https://api.challonge.com/v1/tournaments/${id}/matches.json?state=open&api_key=${api_key}`)
+
     xhr.withCredentials = false
     xhr.setRequestHeader('Accept', 'application/json')
     xhr.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
@@ -37,17 +38,41 @@ export const getOpenMatchesLegacy = () => new Promise((resolve, reject) => reque
 
         return resolve(body)
     }))
-export const updateMatch = (id, score, winner_id = '') => new Promise((resolve, reject) => request({
-        method: 'PUT',
-        url: `https://api.challonge.com/v1/tournaments/${tourney}/matches/${id}.json`,
-        qs: { api_key },
-        headers: { 'access-control-allow-origin': '*' },
-        formData: { 'match[scores_csv]': score, 'match[winner_id]' : winner_id }
-    }, (error, response, body) => {
-        if (error) return reject(error)
+export const updateMatch = (id, score, winner_id = '') => new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest(),
+        data = new FormData()
 
-        return resolve(body)
-    }))
+    data.append('match[scores_csv]', score)
+    data.append('match[winner_id]', winner_id)
+
+    xhr.withCredentials = true
+
+    xhr.addEventListener('readystatechange', function () {
+        if (this.readyState === 4) {
+            console.log('Data', JSON.parse(this.responseText))
+            return resolve(JSON.parse(this.responseText))
+        }
+    })
+    console.log('asdasd', id)
+    xhr.open('PUT', `https://cors-anywhere.herokuapp.com/https://api.challonge.com/v1/tournaments/${tourney}/matches/${id}.json?api_key=${api_key}`)
+
+    xhr.withCredentials = false
+    xhr.setRequestHeader('Accept', 'application/json')
+    xhr.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+
+    xhr.send(data)
+    // request({
+    //     method: 'PUT',
+    //     url: `https://api.challonge.com/v1/tournaments/${tourney}/matches/${id}.json`,
+    //     qs: { api_key },
+    //     headers: { 'access-control-allow-origin': '*' },
+    //     formData: { 'match[scores_csv]': score, 'match[winner_id]' : winner_id }
+    // }, (error, response, body) => {
+    //     if (error) return reject(error)
+
+    //     return resolve(body)
+    // })
+})
 export const getPlayerData = id => new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
 

@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import openSocket from 'socket.io-client'
 
-import { fetchMatches } from './actions'
-import { CharacterSelect, GeneralInput, PlayerInput, MatchSelect } from './components'
-import { characterData, getOpenMatches } from './utils/playerUpdates'
+import { fetchMatches, fetchPlayers } from './actions'
+import { CharacterSelect, GeneralInput, PlayerInput } from './components'
+import { characterData, getOpenMatches, updateMatch } from './utils/playerUpdates'
 import './App.css'
 import 'materialize-css/dist/css/materialize.min.css'
 
@@ -21,6 +21,7 @@ class App extends Component {
       playerTwoName: '',
       playerTwoScore: 0,
       playerTwoCharacter: '',
+      currentMatch: '',
       inputName: '',
       inputRound: '',
       inputText: ''
@@ -28,13 +29,28 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { fetchMatches } = this.props
+    const { fetchMatches, fetchPlayers } = this.props
+
+    fetchMatches()
+    fetchPlayers()
     // getOpenMatches('7d5lit4f')
     //   .then(res => {
     //     console.log('complete')
     //     this.setState({ matches: res })
     //   })
     //   .catch(err => console.log(err))
+  }
+
+  updateMatch = (id, player) => {
+    this.setState({
+      currentMatch: id,
+      playerOneName: player[0].participant.name,
+      playerOneId: player[0].participant.id,
+      playerTwoName: player[1].participant.name,
+      playerTwoId: player[1].participant.id,
+      playerOneScore: 0,
+      playerTwoSecore: 0,
+    })
   }
 
   handleChange = event => {
@@ -45,6 +61,31 @@ class App extends Component {
     this.setState({
       [name]: value
     })
+  }
+
+  completeCurrentMatch = () => {
+    const {
+      playerOneId,
+      playerTwoId,
+      playerOneScore,
+      playerTwoScore,
+      currentMatch
+    } = this.state
+
+    let matchWinner = ''
+
+    if (playerOneScore > playerTwoScore) {
+      matchWinner = playerOneId
+    } else if (playerTwoScore > playerOneScore) {
+      matchWinner = playerTwoId
+    }
+
+    updateMatch(currentMatch, `${playerOneScore}-${playerTwoScore}`, matchWinner)
+      .then(res => {
+        console.log(res)
+        const { fetchMatches } = this.props
+        fetchMatches()
+      })
   }
 
   handleMatchSubmit = event => {
@@ -79,6 +120,12 @@ class App extends Component {
   }
 
   render() {
+    const {
+      isLoading,
+      players,
+      matches
+    } = this.props
+
     return (
       <div className='App container'>
         <div class='section'>
@@ -86,22 +133,27 @@ class App extends Component {
           <p>1v1</p>
         </div>
         <div class='divider'></div>
-        <div class='row'>
-          <form onSubmit={this.handleTourneySubmit}>
-            <div class='col s12'>
-              <div class='section'>
-                <h5>Get Tournament Data</h5>
-              </div>
+        <div className='col s12'>
+          {!isLoading && matches.lenght !== 0 && players.lenght !== 0 &&
+            <div>
+              {matches.map(e => {
+                const player = players.filter(p => p.participant.id === e.match.player1_id || p.participant.id === e.match.player2_id)
+                return (
+                  <div class="col s4">
+                    <div class="card blue-grey darken-1">
+                      <div class="card-content white-text">
+                        <span class="card-title">{player[0].participant.name} vs. {player[1].participant.name}</span>
+                      </div>
+                      <div class="card-action">
+                        <input className='waves-effect waves-light btn-large' type='button' onClick={() => this.updateMatch(e.match.id, player)} id={`updateMatch${e.match.id}`} value='Update Match' />
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
-            <div class='col s6'>
-              <GeneralInput title='Tournament Information' type='text' inputValue={this.state.inputText} handleChange={this.handleChange} />
-            </div>
-            <div class='col s6'>
-              <input className='waves-effect waves-light btn-large' type='submit' id='submitTournament' value='Get Matches' />
-            </div>
-          </form>
+          }
         </div>
-        <div class='divider'></div>
         <div class='row'>
           <form onSubmit={this.handleMatchSubmit}>
           <div class='col s6'>
@@ -124,6 +176,7 @@ class App extends Component {
           </div>
           <div class='col s12'>
             <input className='waves-effect waves-light btn-large' type='submit' id='submitScore' value='Update Match' />
+            <input className='waves-effect waves-light btn-large' type='button' onClick={this.completeCurrentMatch} id={`completeMatch`} value='Complete Match' />
           </div>
           </form>
         </div>
@@ -131,11 +184,6 @@ class App extends Component {
           <form onSubmit={this.handleMatchSubmit}>
             <GeneralInput title='Tournament Name' inputValue={this.state.tourneyName} type='name' handleChange={this.handleChange} />
             <GeneralInput title='Tournament Round' inputValue={this.state.tourneyRound} type='round' handleChange={this.handleChange} />
-            {this.state.matches && 
-              <div>
-                <MatchSelect selectName='MatchSelectId' matches={this.state.matches} handleChange={this.handleChange} />
-              </div>
-            }
             <input className='waves-effect waves-light btn-large' type='submit' id='submitEvent' value='Update Event' />
           </form>
         </div>
@@ -147,7 +195,8 @@ class App extends Component {
 const mapStateToProps = state => ({ ...state })
 const mapDispatchToProps = dispatch =>
   (bindActionCreators({
-    fetchMatches
+    fetchMatches,
+    fetchPlayers
   }, dispatch))
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
