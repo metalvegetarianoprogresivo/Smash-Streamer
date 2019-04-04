@@ -1,10 +1,9 @@
 import request from 'request'
 
 import { characters } from './characters'
-import { config } from '../config'
+import { api_key } from '../config'
 
 const
-    api_key = config.api_key,
     tourney = '7d5lit4f'
 
 export const updateMatchData = () => {}
@@ -19,9 +18,8 @@ export const getOpenMatches = id => new Promise((resolve, reject) => {
             console.log('Data', JSON.parse(this.responseText))
             return resolve(JSON.parse(this.responseText))
         }
-        return reject(this.statusText)
     })
-
+    console.log('asdasd', id)
     xhr.open('GET', `https://cors-anywhere.herokuapp.com/https://api.challonge.com/v1/tournaments/${id}/matches.json?state=open&api_key=${api_key}`)
     xhr.withCredentials = false
     xhr.setRequestHeader('Accept', 'application/json')

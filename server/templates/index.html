@@ -33,13 +33,9 @@
 						$('#rightSide').css('background', data.playerTwo.character.color)
 						$('#rightCharacter').css('background-image', 'url(/renders/' + data.playerTwo.character.file + '.png)')
           }).animate({ 'opacity': 1 }, AnimationLenght);
+          $('#tournyName').text(data.tourneyName)
+          $('#tournyRound').text(data.tourneyRound)
         });
-
-				socket.on('event_update', function (data) {
-					console.log('Test... event', data)
-					$('#tournyName').text(data.tournyName)
-					$('#tournyRound').text(data.tournyRound)
-				});
 			});
 	</script>
   

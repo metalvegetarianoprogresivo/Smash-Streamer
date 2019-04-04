@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import M from 'materialize-css'
 
-import { getPlayerData } from '../utils/playerUpdates'
-
 class MatchSelect extends Component {
     componentDidMount() {
         // Auto initialize all the things!
@@ -26,9 +24,9 @@ class MatchSelect extends Component {
         return (
             <div class='input-field'>
                 <select class='icons' name={selectName} value={selectValue} onChange={handleChange}>
-                    <option value='' disabled selected>Choose a Match</option>
+                    <option key='0' value='' disabled selected>Choose a Match</option>
                     {matches.map(match => {
-                        return <option value={match.id}>{match.player1_id} vs. {match.player2_id}</option>
+                        return <option key={match.id} value={match.id}>{match.player1_id} vs. {match.player2_id}</option>
                     })}
                 </select>
                 <label>Choose a Match</label>
