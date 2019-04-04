@@ -40,9 +40,7 @@ class CharacterSelect extends Component {
             <div class='input-field'>
                 <select class='icons' name={`player${capitilize(playerNumber)}Character`} value={playerValue} onChange={handleChange}>
                     <option value='' disabled selected>Choose your character</option>
-                    {characters.fighters.map(name => {
-                        return <option value={name.id} data-icon={`${expressPath}/renders/${name.file}.png`}>{name.displayNameEn}</option>
-                    })}
+                    {characters.fighters.map(name => (<option value={name.id} data-icon={`${expressPath}/renders/${name.file}.png`}>{name.displayNameEn}</option>))}
                 </select>
                 <label>Choose your character</label>
             </div>
