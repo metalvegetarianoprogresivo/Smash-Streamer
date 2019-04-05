@@ -117,13 +117,13 @@
         if (index == 'leftCharacter' && $('#playerOneCharacter').text() != value) {
           $('#playerOneCharacter').text(value);
           $('#leftCharacter').animate({ 'opacity': 0 }, AnimationLength, function () {
-            $('#leftCharacter').css('background-image', 'url(' + value + ')');
+            $('#leftCharacter').css('background-image', 'url(' + value + ')').addClass(value);
           }).animate({ 'opacity': 1 }, AnimationLength);
         }
         else if (index == 'rightCharacter' && $('#playerTwoCharacter').text() != value) {
           $('#playerTwoCharacter').text(value);
           $('#rightCharacter').animate({ 'opacity': 0 }, AnimationLength, function () {
-            $('#rightCharacter').css('background-image', 'url(' + value + ')');
+            $('#rightCharacter').css('background-image', 'url(' + value + ')').addClass(value);
 
           }).animate({ 'opacity': 1 }, AnimationLength);
         }
