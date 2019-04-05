@@ -12,6 +12,7 @@ body {
     width: $appWith;
     height: $appHeight;
     margin: 0px;
+    font-size: 13px;
 }
 
 body {
@@ -86,11 +87,11 @@ body {
     .CharNameInfo {
         color: white;
         font-family: Impact;
-        font-size: xx-large;
+        font-size: 32px;
 
         &--Weeb {
             @extend .CharNameInfo;
-            font-size: large;
+            font-size: 18px;
         }
     }
 }
