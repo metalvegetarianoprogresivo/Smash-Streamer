@@ -2741,7 +2741,7 @@ export const characters = {
             "file": "gaogaen",
             "series": "pokemon",
             "dash": 0,
-            "color": "#f8934b",
+            "color": "#ffffff",
             "colorType": "B",
             "colorOrder": "0",
             "type": "",

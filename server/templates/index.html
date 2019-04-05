@@ -27,6 +27,7 @@
         $('#leftCharacter').animate({ 'opacity': 0 }, AnimationLength, function () {
           $('#leftSide').css('background', data.playerOne.character.color)
           $('#leftCharacter').css('background-image', 'url(/renders/' + data.playerOne.character.file + '.png)')
+          .attr('class',`CharImage ${data.playerOne.character.file}`)
         }).animate({ 'opacity': 1 }, AnimationLength);
         $('#playerTwoPrefix').text(data.playerTwo.team)
         $('#playerTwoTag').text(data.playerTwo.name)
@@ -36,6 +37,7 @@
         $('#rightCharacter').animate({ 'opacity': 0 }, AnimationLength, function () {
           $('#rightSide').css('background', data.playerTwo.character.color)
           $('#rightCharacter').css('background-image', 'url(/renders/' + data.playerTwo.character.file + '.png)')
+          .attr('class',`CharImage ${data.playerTwo.character.file}`)
         }).animate({ 'opacity': 1 }, AnimationLength);
         $('.tourneyName').text(data.tourneyName)
         $('.tourneyRound').text(data.tourneyRound)
@@ -118,6 +120,7 @@
           $('#playerOneCharacter').text(value);
           $('#leftCharacter').animate({ 'opacity': 0 }, AnimationLength, function () {
             $('#leftCharacter').css('background-image', 'url(' + value + ')').addClass(value);
+            console.log('charname', value);
           }).animate({ 'opacity': 1 }, AnimationLength);
         }
         else if (index == 'rightCharacter' && $('#playerTwoCharacter').text() != value) {

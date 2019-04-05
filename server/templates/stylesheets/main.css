@@ -68,17 +68,22 @@ body {
   text-align: center;
   margin: 10px 0;
 }
+/* line 63, ../sass/main.scss */
+#leftSide .CharImage.mario,
+#rightSide .CharImage.mario {
+  background-position: left center;
+}
 
-/* line 64, ../sass/main.scss */
+/* line 68, ../sass/main.scss */
 #rightSide {
   left: auto;
   right: 0px;
 }
-/* line 69, ../sass/main.scss */
+/* line 73, ../sass/main.scss */
 #rightSide .CharName--wrapper {
   text-align: right;
 }
-/* line 73, ../sass/main.scss */
+/* line 77, ../sass/main.scss */
 #rightSide .playerInfo {
   left: auto;
   right: -4px;
@@ -86,7 +91,7 @@ body {
   background-position: calc(100% + 80px) center;
 }
 
-/* line 81, ../sass/main.scss */
+/* line 85, ../sass/main.scss */
 .CharName--wrapper {
   position: relative;
   top: 30px;
@@ -94,18 +99,18 @@ body {
   padding: 15px;
   flex: 0 1 auto;
 }
-/* line 88, ../sass/main.scss */
+/* line 92, ../sass/main.scss */
 .CharName--wrapper .CharNameInfo, .CharName--wrapper .CharNameInfo--Weeb {
   color: white;
   font-family: Impact;
   font-size: 32px;
 }
-/* line 93, ../sass/main.scss */
+/* line 97, ../sass/main.scss */
 .CharName--wrapper .CharNameInfo--Weeb {
   font-size: 18px;
 }
 
-/* line 100, ../sass/main.scss */
+/* line 104, ../sass/main.scss */
 .CharImage {
   background-repeat: no-repeat;
   background-size: 400px;
@@ -117,7 +122,7 @@ body {
   overflow: hidden;
 }
 
-/* line 111, ../sass/main.scss */
+/* line 115, ../sass/main.scss */
 #bottom {
   position: absolute;
   height: 250px;
@@ -126,7 +131,7 @@ body {
   bottom: 0px;
   display: flex;
 }
-/* line 119, ../sass/main.scss */
+/* line 123, ../sass/main.scss */
 #bottom .leftCam,
 #bottom .rightCam {
   flex: 0 0 480px;
@@ -134,7 +139,7 @@ body {
   height: 248px;
   z-index: 99;
 }
-/* line 128, ../sass/main.scss */
+/* line 132, ../sass/main.scss */
 #bottom .tournamentInfo {
   flex: 1 1 auto;
   display: flex;
@@ -142,26 +147,26 @@ body {
   align-items: center;
   background: black;
 }
-/* line 137, ../sass/main.scss */
+/* line 141, ../sass/main.scss */
 #bottom .tourneyRound--wrapper, #bottom .tourneyName--wrapper, #bottom .tourneyScore {
   flex: 1 1 auto;
   color: white;
   font-family: Impact, Sans-serif;
 }
-/* line 145, ../sass/main.scss */
+/* line 149, ../sass/main.scss */
 #bottom .tourneyScore {
   font-size: 90px;
 }
-/* line 149, ../sass/main.scss */
+/* line 153, ../sass/main.scss */
 #bottom .tourneyName--wrapper {
   font-size: 65px;
 }
-/* line 153, ../sass/main.scss */
+/* line 157, ../sass/main.scss */
 #bottom .tourneyRound--wrapper {
   font-size: 25px;
 }
 
-/* line 163, ../sass/main.scss */
+/* line 167, ../sass/main.scss */
 #gameWindow {
   position: absolute;
   width: 1440px;
@@ -170,17 +175,17 @@ body {
   z-index: 1;
 }
 
-/* line 173, ../sass/main.scss */
+/* line 177, ../sass/main.scss */
 .sponsor {
   color: #add8e6;
 }
 
-/* line 178, ../sass/main.scss */
+/* line 182, ../sass/main.scss */
 .hide {
   display: none;
 }
 
-/* line 182, ../sass/main.scss */
+/* line 186, ../sass/main.scss */
 #playerOneScore,
 #playerTwoScore,
 #playerOneTag,
