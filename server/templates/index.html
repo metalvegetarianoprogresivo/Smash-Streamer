@@ -1,184 +1,164 @@
 <!DOCTYPE html>
-<html class="gr__smashstreamer_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html class="gr__smashstreamer_com">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'UA-112341214-1');
   </script>
-<!-- Jquery -->
+  <!-- Jquery -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="/socket.io/socket.io.js"></script>
-	<script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
     $(function () {
-				var socket = io();
-				socket.on('match_update', function (data) {
-					console.log('Test... match', data)
-					$('#playerOnePrefix').text(data.playerOne.team)
-					$('#playerOneTag').text(data.playerOne.name)
-					$('#playerOneScore').html(data.playerOne.score)
-					$('#leftCharacterNameWeeb').html(data.playerOne.character.displayNameJa)
-					$('#leftCharacterName').html(data.playerOne.character.displayName.en_US)
-					$('#leftCharacter').animate({ 'opacity': 0 }, AnimationLenght, function () {
-						$('#leftSide').css('background', data.playerOne.character.color)
-						$('#leftCharacter').css('background-image', 'url(/renders/' + data.playerOne.character.file + '.png)')
-					}).animate({ 'opacity': 1 }, AnimationLenght);
-					$('#playerTwoPrefix').text(data.playerTwo.team)
-					$('#playerTwoTag').text(data.playerTwo.name)
-					$('#playerTwoScore').html(data.playerTwo.score)
-					$('#rightCharacterNameWeeb').html(data.playerTwo.character.displayNameJa)
-					$('#rightCharacterName').html(data.playerTwo.character.displayName.en_US)
-					$('#rightCharacter').animate({ 'opacity': 0 }, AnimationLenght, function () {
-						$('#rightSide').css('background', data.playerTwo.character.color)
-						$('#rightCharacter').css('background-image', 'url(/renders/' + data.playerTwo.character.file + '.png)')
-          }).animate({ 'opacity': 1 }, AnimationLenght);
-          $('#tournyName').text(data.tourneyName)
-          $('#tournyRound').text(data.tourneyRound)
-        });
-			});
-	</script>
-  
-<title>Stream</title>
-<link rel="shortcut icon" href="http://smashstreamer.com/content/Images/TournamentLogo.png" />
-<link rel="stylesheet" type="text/css" href="style.css">
+      var socket = io();
+      console.log('ready')
+      socket.on('match_update', function (data) {
+        console.log('Test...', data)
+        $('#playerOnePrefix').text(data.playerOne.team)
+        $('#playerOneTag').text(data.playerOne.name)
+        $('#playerOneScore').html(data.playerOne.score)
+        $('#leftCharacterNameWeeb').html(data.playerOne.character.displayNameJa)
+        $('#leftCharacterName').html(data.playerOne.character.displayName.en_US)
+        $('#leftCharacter').animate({ 'opacity': 0 }, AnimationLength, function () {
+          $('#leftSide').css('background', data.playerOne.character.color)
+          $('#leftCharacter').css('background-image', 'url(/renders/' + data.playerOne.character.file + '.png)')
+        }).animate({ 'opacity': 1 }, AnimationLength);
+        $('#playerTwoPrefix').text(data.playerTwo.team)
+        $('#playerTwoTag').text(data.playerTwo.name)
+        $('#playerTwoScore').html(data.playerTwo.score)
+        $('#rightCharacterNameWeeb').html(data.playerTwo.character.displayNameJa)
+        $('#rightCharacterName').html(data.playerTwo.character.displayName.en_US)
+        $('#rightCharacter').animate({ 'opacity': 0 }, AnimationLength, function () {
+          $('#rightSide').css('background', data.playerTwo.character.color)
+          $('#rightCharacter').css('background-image', 'url(/renders/' + data.playerTwo.character.file + '.png)')
+        }).animate({ 'opacity': 1 }, AnimationLength);
+        $('.tourneyName').text(data.tourneyName)
+        $('.tourneyRound').text(data.tourneyRound)
+      });
+    });
+  </script>
+
+  <title>Stream</title>
+  <link rel="shortcut icon" href="http://smashstreamer.com/content/Images/TournamentLogo.png" />
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body style="" data-gr-c-s-loaded="true" data-feedly-mini="yes">
-<span id="playerOneCharacter" class="hide">/renders/kirby.png</span>
-<span id="playerTwoCharacter" class="hide">./content/Images/Smash4Characters/LittleMac.png</span>
-<span id="playerOneCountry" class="hide">./content/Images/Flags/ca.png</span>
-<span id="playerTwoCountry" class="hide">./content/Images/Flags/mx.png</span>
-<span id="background" class="hide">./content/Images/background/NewYork.jpeg</span>
-<div id="leftSide">
-<div id="leftFlag">
-</div>
-<div id="leftCharacterName" class="playerCharacterInfo">CHARACTER</div>
-<div id="leftCharacterNameWeeb" class="playerCharacterInfoWeeb">CHARACTER</div>
-<div id="leftCharacter">
-</div>
-</div>
-<div id="rightSide">
-<div id="rightFlag">
-</div>
-<div id="rightCharacterName" class="playerCharacterInfo">CHARACTER</div>
-<div id="rightCharacterNameWeeb" class="playerCharacterInfoWeeb">CHARACTER</div>
-<div id="rightCharacter">
-</div>
-</div>
-<div id="gameWindow">
-</div>
-<div id="bottom">
-<div id="playerOneInfo" class="playerInfo">
-  <h1><span class="sponsor" id="playerOnePrefix">NTN</span> <span id="playerOneTag">Xotl</span></h1>
-  <h2 id="playerOneTwitter" style="opacity: 1;"> </h2>
-  <span class="score" id="playerOneScore">2</span>
-</div>
-<div id="playerTwoInfo" class="playerInfo">
-  <h1><span class="sponsor" id="playerTwoPrefix">SEES</span> <span id="playerTwoTag">DIO</span></h1>
-  <h2 id="playerTwoTwitter" style="opacity: 1;"> </h2>
-  <span class="score" id="playerTwoScore">1</span>
-</div>
-<div id="dash">-</div>
-<div id="tournyLogo">
-</div>
-<div id="tournyNameDiv">
-<p id="tournyName">Haxor Magic</p>
-</div>
-<div id="tournyRoundDiv">
-  <p id="tournyRound">Pools</p>
-</div>
-<div id="leftCam">
-</div>
-<div id="rightCam">
-</div>
-</div>
-<script>
-var AnimationLenght = 250;
-var refreshRate = 1000;
-//setTimeout('window.location.href=window.location.href;', 3000);
-// $.getJSON("getData.php", function(data){
-//     $.each(data, function (index, value) {
-//     // UpdateStream(index,value);
-//     });
-// });
-// setInterval(function() {
-//   $.getJSON("getData.php", function(data){
-// var count = 0;
-//     $.each(data, function (index, value) {
-//     UpdateStream(index,value);
-//     //console.log(count);
-//     count++;
+  <span id="playerOneCharacter" class="hide"></span>
+  <span id="playerTwoCharacter" class="hide"></span>
+  <div id="leftSide">
+    <div class="CharName--wrapper">
+      <div id="leftCharacterNameWeeb" class="CharNameInfo--Weeb">weeb</div>
+      <div id="leftCharacterName" class="CharNameInfo">CHARACTER</div>
+    </div>
+    <div id="leftCharacter" class="CharImage">
+    </div>
+    <div id="playerOneInfo" class="playerInfo">
+      <h1><span class="sponsor" id="playerOnePrefix">NTN</span> | <span id="playerOneTag">Xotl</span></h1>
+    </div>
+  </div>
+  <div id="rightSide">
+    <div class="CharName--wrapper">
+      <div id="rightCharacterNameWeeb" class="CharNameInfo--Weeb">weeb</div>
+      <div id="rightCharacterName" class="CharNameInfo">CHARACTER</div>
+    </div>
+    <div id="rightCharacter" class="CharImage">
+    </div>
+    <div id="playerTwoInfo" class="playerInfo">
+      <h1><span class="sponsor" id="playerTwoPrefix">SEES</span> | <span id="playerTwoTag">DIO</span></h1>
+    </div>
+  </div>
+  <div id="gameWindow">
+  </div>
+  <div id="bottom">
+    <div class="leftCam">
+    </div>
+    <div class="tournamentInfo">
+      <div class="tourneyScore">
+        <span class="score" id="playerOneScore">2</span> - <span class="score" id="playerTwoScore">1</span>
+      </div>
+      <div class="tourneyName--wrapper">
+        <div class="tourneyName">Haxor Magic</div>
+      </div>
+      <div class="tourneyRound--wrapper">
+        <div class="tourneyRound">Pools</div>
+      </div>
+    </div>
+    <div class="rightCam">
+    </div>
+  </div>
+  <script type="text/javascript">
+    var AnimationLength = 250;
+    var refreshRate = 1000;
 
-//     });
-// });
-// }, refreshRate);
-function FirstUpdate(index,value) {
+    function FirstUpdate(index, value) {
 
-    if(index == 'leftCharacter' || index == 'rightCharacter' || index == 'leftFlag' || index == 'rightFlag')
-    {
-      // $('#leftCharacter').css('background-image', 'url('+$('#playerOneCharacter').text()+')');
-    // $('#rightCharacter').css('background-image', 'url('+$('#playerTwoCharacter').text()+')');
-    // $('#leftFlag').css('background-image', 'url('+$('#playerOneCountry').text()+')');
-    // $('#rightFlag').css('background-image', 'url('+$('#playerTwoCountry').text()+')');
-    }
-    else if($('#'+index).text() != value){
-    $('#'+index).animate({'opacity': 0}, 1000, function () {
-      $('#'+index).text(value);
-    }).animate({'opacity': 1}, AnimationLenght);
-    }
-   // else if(){
+      if (index == 'leftCharacter' || index == 'rightCharacter' || index == 'leftFlag' || index == 'rightFlag') {
+      }
+      else if ($('#' + index).text() != value) {
+        $('#' + index).animate({ 'opacity': 0 }, 1000, function () {
+          $('#' + index).text(value);
+        }).animate({ 'opacity': 1 }, AnimationLength);
+      }
+      // else if(){
 
-   // }
- };
-function UpdateStream(index,value) {
-if(value == "")
-{
- value = " ";
-}
-if(index == 'leftCharacter' || index == 'rightCharacter' || index == 'leftFlag' || index == 'rightFlag' || index == "background")
-    {
-    if(index == 'leftCharacter' && $('#playerOneCharacter').text() != value){
-      $('#playerOneCharacter').text(value);
-      $('#leftCharacter').animate({'opacity': 0}, AnimationLenght, function () {
-        $('#leftCharacter').css('background-image', 'url('+value+')');
-      }).animate({'opacity': 1}, AnimationLenght);
-    }
-    else if(index == 'rightCharacter' && $('#playerTwoCharacter').text() != value){
-      $('#playerTwoCharacter').text(value);
-      $('#rightCharacter').animate({'opacity': 0}, AnimationLenght, function () {
-        $('#rightCharacter').css('background-image', 'url('+value+')');
+      // }
+    };
+    function UpdateStream(index, value) {
+      if (value == "") {
+        value = " ";
+      }
+      if (index == 'leftCharacter' || index == 'rightCharacter' || index == 'leftFlag' || index == 'rightFlag' || index == "background") {
+        if (index == 'leftCharacter' && $('#playerOneCharacter').text() != value) {
+          $('#playerOneCharacter').text(value);
+          $('#leftCharacter').animate({ 'opacity': 0 }, AnimationLength, function () {
+            $('#leftCharacter').css('background-image', 'url(' + value + ')');
+          }).animate({ 'opacity': 1 }, AnimationLength);
+        }
+        else if (index == 'rightCharacter' && $('#playerTwoCharacter').text() != value) {
+          $('#playerTwoCharacter').text(value);
+          $('#rightCharacter').animate({ 'opacity': 0 }, AnimationLength, function () {
+            $('#rightCharacter').css('background-image', 'url(' + value + ')');
 
-      }).animate({'opacity': 1}, AnimationLenght);
-    }
-    else if(index == 'leftFlag' && $('#playerOneCountry').text() != value){
-      $('#playerOneCountry').text(value);
-      $('#leftFlag').animate({'opacity': 0}, AnimationLenght, function () {
-        $('#leftFlag').css('background-image', 'url('+value+')');
+          }).animate({ 'opacity': 1 }, AnimationLength);
+        }
+        else if (index == 'leftFlag' && $('#playerOneCountry').text() != value) {
+          $('#playerOneCountry').text(value);
+          $('#leftFlag').animate({ 'opacity': 0 }, AnimationLength, function () {
+            $('#leftFlag').css('background-image', 'url(' + value + ')');
 
-      }).animate({'opacity': 1}, AnimationLenght);
-    }
-    else if(index == 'rightFlag' && $('#playerTwoCountry').text() != value){
-      $('#playerTwoCountry').text(value);
-      $('#rightFlag').animate({'opacity': 0}, AnimationLenght, function () {
-        $('#rightFlag').css('background-image', 'url('+value+')');
+          }).animate({ 'opacity': 1 }, AnimationLength);
+        }
+        else if (index == 'rightFlag' && $('#playerTwoCountry').text() != value) {
+          $('#playerTwoCountry').text(value);
+          $('#rightFlag').animate({ 'opacity': 0 }, AnimationLength, function () {
+            $('#rightFlag').css('background-image', 'url(' + value + ')');
 
-      }).animate({'opacity': 1}, AnimationLenght);
-    }
-    else if(index == 'background' && $('#background').text() != value){
-      $('#background').text(value);
-      $('body').css('background-image', 'url('+value+')');
-    }
-    }
-    else if($('#'+index).text() != value){
-    $('#'+index).animate({'opacity': 0}, AnimationLenght, function () {
-      $(this).text(value);
-    }).animate({'opacity': 1}, AnimationLenght);
-    }
-   // else if(){
+          }).animate({ 'opacity': 1 }, AnimationLength);
+        }
+        else if (index == 'background' && $('#background').text() != value) {
+          $('#background').text(value);
+          $('body').css('background-image', 'url(' + value + ')');
+        }
+      }
+      else if ($('#' + index).text() != value) {
+        $('#' + index).animate({ 'opacity': 0 }, AnimationLength, function () {
+          $(this).text(value);
+        }).animate({ 'opacity': 1 }, AnimationLength);
+      }
+      // else if(){
 
-   // }
- };
-</script>
+      // }
+    };
+  </script>
 
 
-<div id="feedly-mini" title="feedly Mini tookit"></div></body></html>
+  <div id="feedly-mini" title="feedly Mini tookit"></div>
+</body>
+
+</html>
