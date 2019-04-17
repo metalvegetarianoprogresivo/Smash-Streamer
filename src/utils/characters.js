@@ -2787,6 +2787,45 @@ export const characters = {
             "displayNameEnSecondary": "PIRANHA PLANT",
             "fileSecondary": "piranha_plant",
             "slug": "cat02_fighter_70"
+        },
+        {
+            "id": "f074",
+            "displayNum": "71",
+            "dlc": 1,
+            "displayName": {
+                "ja_JP": "ジョーカー",
+                "en_US": "JOKER",
+                "en_GB": "JOKER",
+                "en_AU": "JOKER",
+                "fr_FR": "JOKER",
+                "fr_CA": "JOKER",
+                "es_ES": "JOKER",
+                "es_LA": "JOKER",
+                "de_DE": "JOKER",
+                "it_IT": "JOKER",
+                "nl_NL": "JOKER",
+                "ru_RU": "ДЖОКЕР",
+                "ko_KR": "조커",
+                "TC": "JOKER",
+                "SC": "JOKER"
+            },
+            "url": "71",
+            "displayNameJa": "ジョーカー",
+            "serialNum": false,
+            "displayNameEn": "JOKER",
+            "displayNameKo": "조커",
+            "displayNameSc": "JOKER",
+            "displayNameTc": "JOKER",
+            "file": "joker",
+            "series": "persona",
+            "dash": 0,
+            "color": "#f8934b",
+            "colorType": "B",
+            "colorOrder": "0",
+            "type": "",
+            "displayNameEnSecondary": "JOKER",
+            "fileSecondary": "joker",
+            "slug": "cat02_fighter_71"
         }
     ]
 }
