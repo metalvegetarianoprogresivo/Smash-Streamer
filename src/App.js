@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import openSocket from 'socket.io-client'
 
-import { fetchMatches, fetchPlayers } from './actions'
+// import { fetchMatches, fetchPlayers } from './actions'
 import { CharacterSelect, GeneralInput, PlayerInput } from './components'
-import { characterData, getOpenMatches, updateMatch } from './utils/playerUpdates'
+import { characterData } from './utils/playerUpdates'
 import './App.css'
 import 'materialize-css/dist/css/materialize.min.css'
 
@@ -29,10 +29,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { fetchMatches, fetchPlayers } = this.props
+    // const { fetchMatches, fetchPlayers } = this.props
 
-    fetchMatches()
-    fetchPlayers()
+    // fetchMatches()
+    // fetchPlayers()
     // getOpenMatches('7d5lit4f')
     //   .then(res => {
     //     console.log('complete')
@@ -80,12 +80,12 @@ class App extends Component {
       matchWinner = playerTwoId
     }
 
-    updateMatch(currentMatch, `${playerOneScore}-${playerTwoScore}`, matchWinner)
-      .then(res => {
-        console.log(res)
-        const { fetchMatches } = this.props
-        fetchMatches()
-      })
+    // updateMatch(currentMatch, `${playerOneScore}-${playerTwoScore}`, matchWinner)
+    //   .then(res => {
+    //     console.log(res)
+    //     const { fetchMatches } = this.props
+    //     fetchMatches()
+    //   })
   }
 
   handleMatchSubmit = event => {
@@ -108,16 +108,16 @@ class App extends Component {
     })
   }
 
-  handleTourneySubmit = event => {
-    event.preventDefault()
-    console.log('id', this.state.inputText)
-    getOpenMatches(this.state.inputText)
-      .then(res => {
-        console.log('complete')
-        this.setState({ matches: res })
-      })
-      .catch(err => console.log(err))
-  }
+  // handleTourneySubmit = event => {
+  //   event.preventDefault()
+  //   console.log('id', this.state.inputText)
+  //   getOpenMatches(this.state.inputText)
+  //     .then(res => {
+  //       console.log('complete')
+  //       this.setState({ matches: res })
+  //     })
+  //     .catch(err => console.log(err))
+  // }
 
   render() {
     const {
@@ -194,9 +194,6 @@ class App extends Component {
 
 const mapStateToProps = state => ({ ...state })
 const mapDispatchToProps = dispatch =>
-  (bindActionCreators({
-    fetchMatches,
-    fetchPlayers
-  }, dispatch))
+  (bindActionCreators({}, dispatch))
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
