@@ -1,0 +1,198 @@
+@keyframes backgroundAnimation {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: -10000px 0;
+  }
+}
+/* line 6, ../sass/main.scss */
+html,
+body {
+  max-width: 1920px;
+  max-height: 1080px;
+  overflow: hidden;
+  background-color: black;
+  width: 1920px;
+  height: 1080px;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* line 18, ../sass/main.scss */
+body {
+  background-image: url("../assets/background.jpg");
+  background-size: auto 80%;
+  animation-name: backgroundAnimation;
+  animation-duration: 150s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  background-repeat: repeat-x;
+}
+
+/* line 28, ../sass/main.scss */
+#leftSide,
+#rightSide {
+  height: calc(1080px - 260px);
+  width: 240px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+/* line 37, ../sass/main.scss */
+#leftSide .playerInfo,
+#rightSide .playerInfo {
+  background-image: url(../assets/blend_logo.jpg);
+  background-color: black;
+  background-size: 380px auto;
+  background-repeat: no-repeat;
+  background-position: -80px center;
+  background-blend-mode: exclusion;
+  bottom: -74px;
+  width: 500px;
+  height: auto;
+  color: white;
+  font-family: Impact;
+  top: auto;
+  left: -4px;
+  z-index: 100;
+  transform: skew(3deg, 4deg);
+  position: absolute;
+  box-shadow: 2px 2px 25px rgba(255, 255, 255, 0.15);
+}
+/* line 56, ../sass/main.scss */
+#leftSide .playerInfo h1,
+#rightSide .playerInfo h1 {
+  font-size: 50px;
+  text-align: center;
+  margin: 10px 0;
+}
+/* line 63, ../sass/main.scss */
+#leftSide .CharImage.mario,
+#rightSide .CharImage.mario {
+  background-position: left center;
+}
+
+/* line 68, ../sass/main.scss */
+#rightSide {
+  left: auto;
+  right: 0px;
+}
+/* line 73, ../sass/main.scss */
+#rightSide .CharName--wrapper {
+  text-align: right;
+}
+/* line 77, ../sass/main.scss */
+#rightSide .playerInfo {
+  left: auto;
+  right: -4px;
+  transform: skew(-3deg, -4deg);
+  background-position: calc(100% + 80px) center;
+}
+
+/* line 85, ../sass/main.scss */
+.CharName--wrapper {
+  position: relative;
+  top: 30px;
+  background: black;
+  padding: 15px;
+  flex: 0 1 auto;
+}
+/* line 92, ../sass/main.scss */
+.CharName--wrapper .CharNameInfo, .CharName--wrapper .CharNameInfo--Weeb {
+  color: white;
+  font-family: Impact;
+  font-size: 32px;
+}
+/* line 97, ../sass/main.scss */
+.CharName--wrapper .CharNameInfo--Weeb {
+  font-size: 18px;
+}
+
+/* line 104, ../sass/main.scss */
+.CharImage {
+  background-repeat: no-repeat;
+  background-size: 400px;
+  background-position: center 20%;
+  width: 100%;
+  height: 800px;
+  display: flex;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+/* line 115, ../sass/main.scss */
+#bottom {
+  position: absolute;
+  height: 250px;
+  top: auto;
+  width: 100%;
+  bottom: 0px;
+  display: flex;
+}
+/* line 123, ../sass/main.scss */
+#bottom .leftCam,
+#bottom .rightCam {
+  flex: 0 0 480px;
+  width: 480px;
+  height: 248px;
+  z-index: 99;
+}
+/* line 132, ../sass/main.scss */
+#bottom .tournamentInfo {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: black;
+}
+/* line 141, ../sass/main.scss */
+#bottom .tourneyRound--wrapper, #bottom .tourneyName--wrapper, #bottom .tourneyScore {
+  flex: 1 1 auto;
+  color: white;
+  font-family: Impact, Sans-serif;
+}
+/* line 149, ../sass/main.scss */
+#bottom .tourneyScore {
+  font-size: 90px;
+}
+/* line 153, ../sass/main.scss */
+#bottom .tourneyName--wrapper {
+  font-size: 65px;
+}
+/* line 157, ../sass/main.scss */
+#bottom .tourneyRound--wrapper {
+  font-size: 25px;
+}
+
+/* line 167, ../sass/main.scss */
+#gameWindow {
+  position: absolute;
+  width: 1440px;
+  height: 810px;
+  left: 240px;
+  z-index: 1;
+}
+
+/* line 177, ../sass/main.scss */
+.sponsor {
+  color: #add8e6;
+}
+
+/* line 182, ../sass/main.scss */
+.hide {
+  display: none;
+}
+
+/* line 186, ../sass/main.scss */
+#playerOneScore,
+#playerTwoScore,
+#playerOneTag,
+#playerOneTwitter,
+#playerTwoTag,
+#playerTwoTwitter,
+#tourneyName,
+#tourneyRound {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
