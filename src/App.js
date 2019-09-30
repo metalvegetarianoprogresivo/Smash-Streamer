@@ -9,7 +9,7 @@ import { characterData } from './utils/playerUpdates'
 import './App.css'
 import 'materialize-css/dist/css/materialize.min.css'
 
-const socket = openSocket('http://localhost:3010')
+const socket = openSocket(process.env.SOCKET_URL)
 
 class App extends Component {
   constructor(props) {

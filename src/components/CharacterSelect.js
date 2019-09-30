@@ -15,7 +15,7 @@ const capitilize = word => word.charAt(0).toUpperCase() + word.slice(1),
                 return 'text'
         }
     },
-    expressPath = 'http://localhost:3010'
+    expressPath = process.env.SOCKET_URL
 
 class CharacterSelect extends Component {
     componentDidMount() {
