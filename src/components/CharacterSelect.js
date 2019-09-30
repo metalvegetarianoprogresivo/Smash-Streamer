@@ -15,7 +15,7 @@ const capitilize = word => word.charAt(0).toUpperCase() + word.slice(1),
                 return 'text'
         }
     },
-    expressPath = process.env.SOCKET_URL
+    expressPath = 'https://smash-streamer-view.herokuapp.com'
 
 class CharacterSelect extends Component {
     componentDidMount() {
