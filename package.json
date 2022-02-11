@@ -6,7 +6,7 @@
     "express": "^4.16.4",
     "list-react-files": "^0.2.0",
     "materialize-css": "^1.0.0-rc.2",
-    "node-sass": "^4.9.2",
+    "node-sass": "^7.0.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-redux": "^6.0.1",
